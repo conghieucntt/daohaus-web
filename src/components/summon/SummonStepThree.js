@@ -91,7 +91,6 @@ const SummonStepThree = ({
         <div>
           <h4>Name</h4>
           <p>
-            Our DAO is called{' '}
             <input
               className="inline-field"
               name="name"
@@ -100,7 +99,7 @@ const SummonStepThree = ({
               })}
             />
             {errors.name?.type === 'required' && (
-              <span className="required-field">daos need names</span>
+              <span className="required-field">DAOs need names</span>
             )}
           </p>
         </div>
@@ -108,7 +107,6 @@ const SummonStepThree = ({
         <div>
           <h4>Description</h4>
           <p>
-            The quick description is{' '}
             <textarea
               className="inline-field"
               name="description"
@@ -124,7 +122,7 @@ const SummonStepThree = ({
 
         <div>
           <h4>Currency</h4>
-          <div>
+          <p>
             Our primary currency is{' '}
             <select
               value={daoData.currency}
@@ -139,7 +137,9 @@ const SummonStepThree = ({
                 );
               })}
             </select>
-            and it'll cost at least
+          </p>
+          <p>
+            The minimum cost to join will be{' '}
             <input
               className="inline-field"
               name="minimumTribute"
@@ -149,10 +149,10 @@ const SummonStepThree = ({
               })}
             />
             {errors.minimumTribute?.type === 'required' && (
-              <span className="required-field">required</span>
+              <span className="required-field Danger">Required</span>
             )}
-            {daoData.currency} to join.
-          </div>
+            {daoData.currency}
+          </p>
         </div>
 
         <div>
@@ -168,12 +168,15 @@ const SummonStepThree = ({
               })}
             />{' '}
             {errors.formattedPeriods?.votingPeriod?.type === 'required' && (
-              <span className="required-field">required</span>
+              <span className="required-field Danger">Required</span>
             )}
             {errors.formattedPeriods?.votingPeriod?.type === 'pattern' && (
-              <span className="required-field">not a number</span>
-            )}
-            days. and the grace period is another{' '}
+              <span className="required-field Danger">Should be a number</span>
+            )}{' '}
+            days.
+          </p>
+          <p>
+            The grace period is another{' '}
             <input
               className="inline-field"
               name="formattedPeriods.gracePeriod"
@@ -183,11 +186,11 @@ const SummonStepThree = ({
               })}
             />{' '}
             {errors.formattedPeriods?.gracePeriod?.type === 'required' && (
-              <span className="required-field">required</span>
+              <span className="required-field Danger">Required</span>
             )}
             {errors.formattedPeriods?.gracePeriod?.type === 'pattern' && (
-              <span className="required-field">not a number</span>
-            )}
+              <span className="required-field Danger">Should be a number</span>
+            )}{' '}
             days.
           </p>
         </div>
@@ -195,7 +198,7 @@ const SummonStepThree = ({
         <div>
           <h4>Deposits</h4>
           <p>
-            And a proposal deposit costs{' '}
+            A proposal deposit costs{' '}
             <input
               className="inline-field"
               name="formattedDeposits.proposalDeposit"
@@ -205,12 +208,15 @@ const SummonStepThree = ({
               })}
             />
             {errors.formattedDeposits?.proposalDeposit?.type === 'required' && (
-              <span className="required-field">required</span>
+              <span className="required-field Danger">Required</span>
             )}
             {errors.formattedDeposits?.proposalDeposit?.type === 'pattern' && (
-              <span className="required-field">not a number</span>
+              <span className="required-field">Should be a number</span>
             )}{' '}
-            {daoData.currency} and the proposal reward is{' '}
+            {daoData.currency}
+          </p>
+          <p>
+            The proposal reward is{' '}
             <input
               className="inline-field"
               name="formattedDeposits.processingReward"
@@ -228,20 +234,20 @@ const SummonStepThree = ({
             />{' '}
             {errors.formattedDeposits?.processingReward?.type ===
               'lessThanDeposit' && (
-              <span className="required-field">
-                processing reward must be less than that proposal deposit
+              <span className="required-field Danger">
+                Processing reward must be less than that proposal deposit
               </span>
             )}
             {errors.formattedDeposits?.processingReward?.type ===
               'required' && <span className="required-field">required</span>}
             {errors.formattedDeposits?.processingReward?.type === 'pattern' && (
-              <span className="required-field">not a number</span>
+              <span className="required-field Danger">Should be a number</span>
             )}{' '}
             {daoData.currency}
           </p>
         </div>
         <div className="StepControl">
-          <button onClick={() => navigate(2)}>
+          <button className="Outlined" onClick={() => navigate(2)}>
             <ArrowLeftOutlined style={{ marginRight: '5px' }} />
             GO BACK
           </button>

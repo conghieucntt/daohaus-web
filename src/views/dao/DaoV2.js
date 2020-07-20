@@ -8,7 +8,6 @@ import { successMessagesText } from '../../util/helpers';
 import MolochService from '../../util/molochService';
 import HeadTags from '../../components/headTags/HeadTags';
 import ApplicationList from '../../components/applicationList/ApplicationList';
-import PokemolBrand from '../../assets/pokemol__brand--standard-white.svg';
 
 import './Dao.scss';
 
@@ -115,14 +114,13 @@ const DaoV2 = props => {
                   <h4 className="Label">Things to DAO</h4>
                   {!daoData.apiData.hidePokemol ? (
                     <div className="Dapp">
-                      <p className="Label">Proposal and Voting dApp</p>
                       <a
-                        className="Button Pokemol"
+                        className="Button Medium"
                         href={`${process.env.REACT_APP_POKEMOL_URL}/dao/${molochService.contractAddr}`}
                         target="_blank"
                         rel="noreferrer noopener"
                       >
-                        <img src={PokemolBrand} alt="pokemol" />
+                        Enter the DAO
                       </a>
                     </div>
                   ) : null}

@@ -25,13 +25,14 @@ const Profile = props => {
 
   useEffect(() => {
     const setup = async () => {
-      let profile;
+      let boxProfile;
       try {
-        profile = await getProfile(props.match.params.account);
+        boxProfile = await getProfile(props.match.params.account);
       } catch {
-        profile = {};
+        boxProfile = {};
       }
-      setProfile(profile);
+
+      setProfile(boxProfile);
     };
 
     setup();
@@ -52,7 +53,6 @@ const Profile = props => {
           `moloch/orphans/${props.match.params.account}`,
         );
 
-        console.log('orphans', orphans);
         setUnregisteredDaos(
           orphans.data.filter(orphan => {
             return orphan.summonerAddress === web3context.account.toLowerCase();
@@ -103,9 +103,9 @@ const Profile = props => {
 
             {profile.website ? (
               <>
-                {profile.website.indexOf('http') > 0 ? (
+                {profile.website.indexOf('http') >= 0 ? (
                   <a
-                    href={profile.website.match}
+                    href={profile.website}
                     target="_blank"
                     rel="noreferrer noopener"
                   >
@@ -130,11 +130,11 @@ const Profile = props => {
           <div>
             <div className="Profile__balances">
               <div className="Profile__balances--Boosts">
-                <p>Boosts</p>
+                <h5>Boosts</h5>
                 <p>0</p>
               </div>
               <div className="Profile__balances--HAUS">
-                <p>$HAUS</p>
+                <h5>$HAUS</h5>
                 <p>Coming soon :)</p>
               </div>
             </div>
@@ -146,17 +146,17 @@ const Profile = props => {
         {loading ? <p>Loading</p> : null}
         {error ? <p>Error - are you on mainnet?</p> : null}
 
-        {unregisteredDaos.length ? (
-          <>
-            <h2>Unregistered Moloch V2 Daos</h2>
-            {renderUnregisteredList()}
-          </>
-        ) : null}
-
         {data && memberDaos.length ? (
           <>
             <ProfileMemberList daos={memberDaos} />
             <ProfileActivityFeed daos={memberDaos} />
+          </>
+        ) : null}
+
+        {unregisteredDaos.length ? (
+          <>
+            <h2>Unregistered Moloch V2 Daos</h2>
+            {renderUnregisteredList()}
           </>
         ) : null}
       </div>

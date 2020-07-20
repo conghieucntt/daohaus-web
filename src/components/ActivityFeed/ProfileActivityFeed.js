@@ -26,9 +26,15 @@ const ProfileActivityFeed = ({ daos }) => {
         }),
       ];
 
+      const activeRages = dao.rageQuits.filter(rage => {
+        // 1209600000 === 2 weeks
+        const now = (new Date() / 1000) | 0;
+        return +rage.createdAt >= now - 1209600;
+      });
+
       rageActivities = [
         ...rageActivities,
-        ...dao.rageQuits.map(rage => {
+        ...activeRages.map(rage => {
           return { ...rage, daoTitle: dao.title };
         }),
       ];
@@ -39,16 +45,16 @@ const ProfileActivityFeed = ({ daos }) => {
         (a, b) => +b.createdAt - +a.createdAt,
       ),
     );
-    setUnread(unreadProposals.length);
+    setUnread(unreadProposals.length + rageActivities.length);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <div className="ProfileActivityFeed">
       <div className="ProfileActivityFeed__header">
-        <h3>Activity Feed</h3>
+        <h4>Activity Feed</h4>
 
-        <p>unread {unread}</p>
+        <p>{unread} Unread</p>
       </div>
       <ActivityFeed activities={activities} />
     </div>
