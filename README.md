@@ -1,3 +1,5 @@
+[![Gitpod ready-to-code](https://img.shields.io/badge/Gitpod-ready--to--code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/odyssy-automaton/daohaus-web)
+
 # daohaus-web
 
 Web app for exploring and summoning moloch daos.
